@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>ARMORBOT ELITE — BTCUSD Chart</title>
+<style>
+@font-face{font-family:RobotoCondensed;src:local("Roboto Condensed")}
+:root{--scale:1;--w:732px;--h:1536px;--nav-height:92px;--blue:#3F9FE8;--nav-gray:#6A6A6A;--grid:#d9dfe2;--up:#22A99A;--down:#E15852;--rsi:#2F6FDC}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;min-width:0;background:#fff;color:#303030;font-family:RobotoCondensed,"Arial Narrow",Roboto,Arial,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;overflow:hidden}
+body{display:block;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none} body::-webkit-scrollbar{width:0;height:0;display:none}
+.stage{position:relative;width:min(var(--w),100vw);height:calc(1740px * var(--scale));margin:0 auto;background:#fff;overflow:hidden}
+.screen{position:absolute;left:0;top:0;width:var(--w);height:var(--h);transform:scale(var(--scale));transform-origin:top left;background:#fff;overflow:hidden}
+.header{position:absolute;left:0;top:0;width:732px;height:106px;background:#fff;border-bottom:1px solid #dedede}
+.menu{position:absolute;left:19px;top:39px;width:35px;height:27px;cursor:pointer;-webkit-tap-highlight-color:transparent;z-index:10}
+.menu span{display:block;height:4px;margin-bottom:5px;background:#202020;border-radius:1px}
+.ref-icon{position:absolute;display:block;object-fit:contain;image-rendering:auto;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.crosshair-ref{left:317.92px;top:21.17px;width:47.53px;height:48.39px}
+.f-ref{left:424.80px;top:19.16px;width:37.42px;height:50.41px}
+.tool-ref{left:522.28px;top:20.16px;width:50.57px;height:49.47px}
+.account-ref{left:656.38px;top:19.15px;width:55.45px;height:52.48px}
+.chart-wrap{position:absolute;left:0;top:106px;width:732px;height:916px;background:#fff;overflow:hidden;touch-action:none;overscroll-behavior:none}
+.chart-svg{position:absolute;left:0;top:0;width:732px;height:916px;display:block}
+.chart-meta{position:absolute;left:13px;top:18px;z-index:3;line-height:1}
+.symbol{font-size:19px;font-weight:700;color:#117bc5;letter-spacing:.1px}
+.symbol .caret{font-size:13px;color:#117bc5;margin-left:3px;position:relative;top:-1px}
+.timeframe{font-size:18px;font-weight:400;color:#2f2f2f;margin-left:5px}
+.desc{margin-top:8px;font-size:16px;color:#353535;font-weight:400}
+.current-pill{position:absolute;right:0;top:361px;width:108px;height:40px;background:#2FAF9F;color:#fff;border-radius:5px 0 0 5px;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:40px;font-weight:500;letter-spacing:.05px;z-index:5}
+.current-tail{position:absolute;right:108px;top:380px;width:0;height:0;border-top:1px solid transparent}
+.rsi-wrap{position:absolute;left:0;top:1022px;width:732px;height:422px;background:#fff;overflow:hidden;border-top:1px solid #ededed}
+.rsi-svg{position:absolute;left:0;top:0;width:732px;height:422px;display:block;z-index:1}
+.rsi-caption{position:absolute;left:10px;top:10px;font-size:16px;font-weight:500;color:#4b4b4b;z-index:5}
+.rsi-time-grid{position:absolute;left:0;top:0;width:732px;height:422px;display:block;pointer-events:none;z-index:2}
+.rsi-dates{position:absolute;left:0;top:372px;bottom:auto;width:594px;height:28px;z-index:6;pointer-events:none;white-space:nowrap;font-family:RobotoCondensed,"Arial Narrow",Roboto,Arial,sans-serif;font-size:14px;color:#6a6a6a}
+.rsi-dates span{position:absolute;top:0;line-height:18px;transform:translateX(-50%)}
+.nav{position:fixed;left:50%;bottom:0;width:732px;height:92px;transform:translateX(-50%) scale(var(--scale));transform-origin:center bottom;background:#f7f7f7;border-top:1px solid #ededed;z-index:99999;display:block;visibility:visible;opacity:1}
+.nav-item{position:absolute;top:0;width:70px;height:92px;display:block;color:#707070;cursor:pointer;z-index:100000;-webkit-tap-highlight-color:transparent;user-select:none}
+.nav-item svg{position:absolute;display:block;overflow:visible;pointer-events:none;user-select:none;-webkit-user-drag:none;opacity:.9}
+.nav-item.active{color:#3F9FE8}.nav-item.active svg{opacity:1}
+.nav-item:nth-child(1){left:51px}.nav-item:nth-child(1) svg{left:0;top:18px;width:47px;height:42px}
+.nav-item:nth-child(2){left:167px}.nav-item:nth-child(2) svg{left:0;top:18px;width:49px;height:48px}
+.nav-item:nth-child(3){left:290px}.nav-item:nth-child(3) svg{left:0;top:19px;width:45px;height:43px}
+.nav-item:nth-child(4){left:406px}.nav-item:nth-child(4) svg{left:0;top:15px;width:46px;height:45px}
+.nav-item:nth-child(5){left:521px}.nav-item:nth-child(5) svg{left:0;top:17px;width:48px;height:46px}
+.nav-item:nth-child(6){left:627px}.nav-item:nth-child(6) svg{left:0;top:18px;width:47px;height:46px}
+@media(max-width:731px){.screen,.nav{will-change:transform}}
+
+/* Fixed price-axis labels: they remain readable while the plotted candles zoom. */
+#priceLabels{shape-rendering:geometricPrecision}
+#priceLabels text{vector-effect:non-scaling-stroke}
+</style>
+</head>
+<body>
+<div class="stage"><div class="screen">
+<header class="header">
+<div class="menu" onclick="go('dashboard')" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
+<img class="ref-icon crosshair-ref" src="data:image/png;base64,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" alt="" aria-hidden="true">
+<img class="ref-icon f-ref" src="data:image/png;base64,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" alt="" aria-hidden="true">
+<img class="ref-icon tool-ref" src="data:image/png;base64,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" alt="" aria-hidden="true">
+<img class="ref-icon account-ref" src="data:image/png;base64,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" alt="" aria-hidden="true">
+</header>
+
+<section class="chart-wrap" aria-label="BTCUSD H1 chart">
+<div class="chart-meta"><span class="symbol">BTCUSDm<span class="caret">▼</span></span><span class="timeframe">H1</span><div class="desc">Bitcoin vs US Dollar</div></div>
+<svg class="chart-svg" viewBox="0 0 732 916" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><clipPath id="plotClip"><rect x="0" y="0" width="594" height="916"/></clipPath><clipPath id="fixedPlotClip"><rect x="0" y="0" width="594" height="916"/></clipPath></defs>
+<g clip-path="url(#fixedPlotClip)"><g id="zoomPlot" transform="translate(0 0) scale(1 1)">
+<g stroke="#dfe4e7" stroke-width="1" stroke-dasharray="2 7" opacity=".65">
+<line x1="0" y1="61" x2="594" y2="61"/><line x1="0" y1="134" x2="594" y2="134"/><line x1="0" y1="207" x2="594" y2="207"/><line x1="0" y1="280" x2="594" y2="280"/><line x1="0" y1="353" x2="594" y2="353"/><line x1="0" y1="426" x2="594" y2="426"/><line x1="0" y1="499" x2="594" y2="499"/><line x1="0" y1="572" x2="594" y2="572"/><line x1="0" y1="645" x2="594" y2="645"/><line x1="0" y1="718" x2="594" y2="718"/><line x1="0" y1="791" x2="594" y2="791"/><line x1="0" y1="864" x2="594" y2="864"/>
+<line x1="42" y1="0" x2="42" y2="916"/><line x1="122" y1="0" x2="122" y2="916"/><line x1="202" y1="0" x2="202" y2="916"/><line x1="282" y1="0" x2="282" y2="916"/><line x1="362" y1="0" x2="362" y2="916"/><line x1="442" y1="0" x2="442" y2="916"/><line x1="522" y1="0" x2="522" y2="916"/>
+</g>
+
+<line x1="0" y1="380" x2="594" y2="380" stroke="#40a89c" stroke-width="1" stroke-dasharray="7 4" opacity=".72"/>
+<g clip-path="url(#plotClip)">
+<g opacity=".92">
+<rect x="11" y="846" width="4" height="70" fill="#E15852"/><rect x="22" y="824" width="4" height="92" fill="#22A99A"/><rect x="34" y="862" width="4" height="54" fill="#22A99A"/><rect x="45" y="880" width="4" height="36" fill="#E15852"/><rect x="57" y="869" width="4" height="47" fill="#22A99A"/><rect x="69" y="890" width="4" height="26" fill="#E15852"/><rect x="81" y="872" width="4" height="44" fill="#22A99A"/><rect x="93" y="886" width="4" height="30" fill="#E15852"/><rect x="105" y="874" width="4" height="42" fill="#22A99A"/><rect x="117" y="886" width="4" height="30" fill="#E15852"/><rect x="129" y="892" width="4" height="24" fill="#22A99A"/><rect x="141" y="876" width="4" height="40" fill="#22A99A"/><rect x="153" y="881" width="4" height="35" fill="#E15852"/><rect x="165" y="875" width="4" height="41" fill="#22A99A"/><rect x="177" y="860" width="4" height="56" fill="#22A99A"/><rect x="189" y="838" width="4" height="78" fill="#22A99A"/><rect x="201" y="802" width="4" height="114" fill="#22A99A"/><rect x="213" y="826" width="4" height="90" fill="#E15852"/><rect x="225" y="790" width="4" height="126" fill="#22A99A"/><rect x="237" y="822" width="4" height="94" fill="#E15852"/><rect x="249" y="848" width="4" height="68" fill="#22A99A"/><rect x="261" y="870" width="4" height="46" fill="#22A99A"/><rect x="273" y="834" width="4" height="82" fill="#E15852"/><rect x="285" y="807" width="4" height="109" fill="#22A99A"/><rect x="297" y="768" width="4" height="148" fill="#22A99A"/><rect x="309" y="821" width="4" height="95" fill="#E15852"/><rect x="321" y="842" width="4" height="74" fill="#E15852"/><rect x="333" y="789" width="4" height="127" fill="#22A99A"/><rect x="345" y="804" width="4" height="112" fill="#E15852"/><rect x="357" y="849" width="4" height="67" fill="#E15852"/><rect x="369" y="815" width="4" height="101" fill="#22A99A"/><rect x="381" y="832" width="4" height="84" fill="#22A99A"/><rect x="393" y="817" width="4" height="99" fill="#22A99A"/><rect x="405" y="775" width="4" height="141" fill="#22A99A"/><rect x="417" y="834" width="4" height="82" fill="#E15852"/><rect x="429" y="814" width="4" height="102" fill="#22A99A"/><rect x="441" y="846" width="4" height="70" fill="#22A99A"/><rect x="453" y="808" width="4" height="108" fill="#E15852"/><rect x="465" y="779" width="4" height="137" fill="#E15852"/><rect x="477" y="843" width="4" height="73" fill="#22A99A"/><rect x="489" y="760" width="4" height="156" fill="#22A99A"/><rect x="501" y="832" width="4" height="84" fill="#E15852"/><rect x="513" y="723" width="5" height="193" fill="#E15852"/><rect x="526" y="814" width="5" height="102" fill="#22A99A"/><rect x="539" y="853" width="5" height="63" fill="#E15852"/><rect x="552" y="796" width="5" height="120" fill="#E15852"/>
+</g>
+<g stroke-linecap="round" stroke-width="1.6"><path d="M18 653V725" stroke="#E15852"/><path d="M29 628V708" stroke="#22A99A"/><path d="M40 646V699" stroke="#22A99A"/><path d="M51 636V714" stroke="#E15852"/><path d="M62 659V712" stroke="#22A99A"/><path d="M73 630V702" stroke="#E15852"/><path d="M84 644V703" stroke="#22A99A"/><path d="M95 642V697" stroke="#E15852"/><path d="M106 640V689" stroke="#E15852"/><path d="M117 653V705" stroke="#22A99A"/><path d="M128 650V709" stroke="#22A99A"/><path d="M139 642V704" stroke="#22A99A"/><path d="M150 645V696" stroke="#E15852"/><path d="M161 622V687" stroke="#22A99A"/><path d="M172 607V682" stroke="#22A99A"/><path d="M183 590V674" stroke="#22A99A"/><path d="M194 572V655" stroke="#22A99A"/><path d="M205 543V640" stroke="#E15852"/><path d="M216 520V611" stroke="#22A99A"/><path d="M227 504V612" stroke="#22A99A"/><path d="M238 478V586" stroke="#E15852"/><path d="M249 470V560" stroke="#22A99A"/><path d="M260 444V548" stroke="#22A99A"/><path d="M271 420V532" stroke="#E15852"/><path d="M282 392V502" stroke="#22A99A"/><path d="M293 364V476" stroke="#22A99A"/><path d="M304 345V453" stroke="#E15852"/><path d="M315 318V437" stroke="#22A99A"/><path d="M326 327V445" stroke="#E15852"/><path d="M337 298V409" stroke="#22A99A"/><path d="M348 268V390" stroke="#E15852"/><path d="M359 278V382" stroke="#22A99A"/><path d="M370 242V370" stroke="#22A99A"/><path d="M381 210V352" stroke="#22A99A"/><path d="M392 166V329" stroke="#22A99A"/><path d="M403 188V350" stroke="#E15852"/><path d="M414 234V383" stroke="#E15852"/><path d="M425 196V364" stroke="#22A99A"/><path d="M436 125V305" stroke="#22A99A"/><path d="M447 149V323" stroke="#E15852"/><path d="M458 88V279" stroke="#22A99A"/><path d="M469 104V324" stroke="#E15852"/><path d="M480 70V302" stroke="#22A99A"/><path d="M491 39V235" stroke="#E15852"/><path d="M502 95V258" stroke="#E15852"/><path d="M513 131V300" stroke="#E15852"/><path d="M524 160V312" stroke="#22A99A"/><path d="M535 185V344" stroke="#E15852"/><path d="M546 236V398" stroke="#22A99A"/><path d="M557 252V456" stroke="#E15852"/><path d="M568 290V493" stroke="#E15852"/><path d="M579 318V502" stroke="#22A99A"/></g>
+<g><rect x="13" y="674" width="10" height="32" fill="#E15852"/><rect x="24" y="650" width="10" height="42" fill="#22A99A"/><rect x="35" y="662" width="10" height="28" fill="#22A99A"/><rect x="46" y="654" width="10" height="35" fill="#E15852"/><rect x="57" y="668" width="10" height="24" fill="#22A99A"/><rect x="68" y="649" width="10" height="30" fill="#E15852"/><rect x="79" y="659" width="10" height="22" fill="#22A99A"/><rect x="90" y="651" width="10" height="28" fill="#E15852"/><rect x="101" y="654" width="10" height="24" fill="#E15852"/><rect x="112" y="660" width="10" height="31" fill="#22A99A"/><rect x="123" y="672" width="10" height="20" fill="#22A99A"/><rect x="134" y="661" width="10" height="28" fill="#22A99A"/><rect x="145" y="653" width="10" height="26" fill="#E15852"/><rect x="156" y="639" width="10" height="31" fill="#22A99A"/><rect x="167" y="619" width="10" height="34" fill="#22A99A"/><rect x="178" y="598" width="10" height="38" fill="#22A99A"/><rect x="189" y="580" width="10" height="41" fill="#22A99A"/><rect x="200" y="560" width="10" height="35" fill="#E15852"/><rect x="211" y="536" width="10" height="38" fill="#22A99A"/><rect x="222" y="518" width="10" height="34" fill="#22A99A"/><rect x="233" y="497" width="10" height="38" fill="#E15852"/><rect x="244" y="474" width="10" height="34" fill="#22A99A"/><rect x="255" y="456" width="10" height="36" fill="#22A99A"/><rect x="266" y="431" width="10" height="34" fill="#E15852"/><rect x="277" y="404" width="10" height="38" fill="#22A99A"/><rect x="288" y="378" width="10" height="36" fill="#22A99A"/><rect x="299" y="350" width="10" height="38" fill="#E15852"/><rect x="310" y="342" width="10" height="34" fill="#22A99A"/><rect x="321" y="328" width="10" height="38" fill="#E15852"/><rect x="332" y="306" width="10" height="38" fill="#22A99A"/><rect x="343" y="284" width="10" height="40" fill="#E15852"/><rect x="354" y="296" width="10" height="37" fill="#22A99A"/><rect x="365" y="251" width="10" height="45" fill="#22A99A"/><rect x="376" y="221" width="10" height="49" fill="#22A99A"/><rect x="387" y="188" width="10" height="52" fill="#22A99A"/><rect x="398" y="219" width="10" height="52" fill="#E15852"/><rect x="409" y="260" width="10" height="44" fill="#E15852"/><rect x="420" y="214" width="10" height="54" fill="#22A99A"/><rect x="431" y="169" width="10" height="53" fill="#22A99A"/><rect x="442" y="146" width="10" height="40" fill="#E15852"/><rect x="453" y="114" width="10" height="45" fill="#22A99A"/><rect x="464" y="126" width="10" height="50" fill="#E15852"/><rect x="475" y="91" width="10" height="54" fill="#22A99A"/><rect x="486" y="82" width="10" height="59" fill="#E15852"/><rect x="497" y="150" width="10" height="49" fill="#E15852"/><rect x="508" y="184" width="10" height="49" fill="#E15852"/><rect x="519" y="210" width="10" height="42" fill="#22A99A"/><rect x="530" y="247" width="10" height="41" fill="#E15852"/><rect x="541" y="278" width="10" height="44" fill="#22A99A"/><rect x="552" y="307" width="10" height="51" fill="#E15852"/><rect x="563" y="337" width="10" height="67" fill="#E15852"/><rect x="574" y="378" width="10" height="61" fill="#22A99A"/></g>
+</g>
+</g>
+</g>
+<g id="priceLabels" fill="#5f6264" font-family="Roboto Condensed,Arial Narrow,Arial,sans-serif" font-size="15" text-anchor="start"><text x="604" y="58">110 600.00</text><text x="604" y="131">110 200.00</text><text x="604" y="204">109 800.00</text><text x="604" y="277">109 400.00</text><text x="604" y="350">109 000.00</text><text x="604" y="423">108 600.00</text><text x="604" y="496">108 200.00</text><text x="604" y="569">107 800.00</text><text x="604" y="642">107 400.00</text><text x="604" y="715">107 000.00</text><text x="604" y="788">106 600.00</text><text x="604" y="861">106 200.00</text></g>
+<line x1="594" y1="0" x2="594" y2="916" stroke="#ededed" stroke-width="1"/>
+</svg>
+<div class="current-pill">109 058.35</div>
+</section>
+
+<section class="rsi-wrap" aria-label="RSI indicator">
+<div class="rsi-caption">RSI(14) 38.09</div>
+<svg class="rsi-svg" viewBox="0 0 732 422" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<g stroke="#dfe4e7" stroke-width="1" stroke-dasharray="2 7" opacity=".65"><line x1="0" y1="98" x2="594" y2="98"/><line x1="0" y1="268" x2="594" y2="268"/></g>
+<g fill="#666" font-family="Roboto Condensed,Arial Narrow,Arial,sans-serif" font-size="15"><text x="604" y="42">100.00</text><text x="604" y="103">70.00</text><text x="604" y="274">30.00</text><text x="604" y="347">0.00</text></g>
+<path d="M 0 167.0 L 3 170.0 L 6 174.0 L 9 176.5 L 12 173.0 L 15 162.0 L 18 150.0 L 21 146.0 L 24 130.0 L 27 117.0 L 30 116.0 L 33 116.0 L 36 116.5 L 39 109.5 L 42 99.5 L 45 92.0 L 48 98.5 L 51 110.5 L 54 118.5 L 57 120.0 L 60 122.5 L 63 131.0 L 66 133.0 L 69 131.0 L 72 129.0 L 75 127.0 L 78 120.5 L 81 115.0 L 84 114.0 L 87 110.5 L 90 106.5 L 93 108.0 L 96 110.5 L 99 117.0 L 102 121.0 L 105 122.0 L 108 124.0 L 111 127.0 L 114 131.5 L 117 138.0 L 120 142.0 L 123 142.0 L 126 143.0 L 129 141.0 L 132 135.0 L 135 130.5 L 138 131.0 L 141 134.0 L 144 152.5 L 147 160.0 L 150 150.5 L 153 138.0 L 156 132.0 L 159 131.0 L 162 130.0 L 165 133.0 L 168 137.5 L 171 141.5 L 174 141.0 L 177 139.0 L 180 138.0 L 183 141.2 L 186 145.5 L 189 148.0 L 192 142.5 L 195 133.0 L 198 130.0 L 201 126.5 L 204 115.5 L 207 107.5 L 210 106.0 L 213 100.0 L 216 93.0 L 219 96.0 L 222 97.0 L 225 95.0 L 228 98.5 L 231 109.0 L 234 119.5 L 237 118.0 L 240 109.0 L 243 101.0 L 246 101.0 L 249 102.0 L 252 104.0 L 255 101.0 L 258 96.7 L 261 93.0 L 264 93.0 L 267 90.5 L 270 83.0 L 273 80.0 L 276 77.5 L 279 74.0 L 282 76.0 L 285 79.0 L 288 81.5 L 291 84.5 L 294 91.0 L 297 95.0 L 300 88.0 L 303 78.0 L 306 69.0 L 309 82.0 L 312 104.0 L 315 122.0 L 318 120.5 L 321 117.5 L 324 114.0 L 327 114.0 L 330 112.0 L 333 110.0 L 336 113.0 L 339 116.0 L 342 118.5 L 345 114.0 L 348 108.5 L 351 103.5 L 354 107.5 L 357 113.5 L 360 117.5 L 363 113.0 L 366 102.5 L 369 95.3 L 372 93.5 L 375 87.0 L 378 79.0 L 381 89.0 L 384 102.0 L 387 114.0 L 390 117.0 L 393 118.5 L 396 129.0 L 399 139.5 L 402 139.0 L 405 139.0 L 408 133.8 L 411 130.0 L 414 128.5 L 417 122.5 L 420 114.5 L 423 113.0 L 426 111.0 L 429 109.0 L 432 106.0 L 435 98.0 L 438 91.0 L 441 98.0 L 444 110.5 L 447 120.0 L 450 121.0 L 453 122.0 L 456 132.0 L 459 145.5 L 462 157.5 L 465 158.0 L 468 160.1 L 471 166.4 L 474 174.5 L 477 179.0 L 480 179.0 L 483 179.0 L 486 176.5 L 489 166.5 L 492 157.0 L 495 158.5 L 498 171.5 L 501 189.0 L 504 202.0 L 507 201.0 L 510 199.0 L 513 199.5 L 516 207.0 L 519 223.0 L 522 229.0 L 525 232.0 L 528 240.0 L 531 242.5 L 534 236.5 L 537 227.5 L 540 220.5 L 543 217.0" fill="none" stroke="#2F6FDC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="594" y1="0" x2="594" y2="422" stroke="#ededed" stroke-width="1"/>
+</svg>
+<svg class="rsi-time-grid" viewBox="0 0 732 422" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<g stroke="#dfe4e7" stroke-width="1" stroke-dasharray="2 7" opacity=".65"><line x1="51"  y1="0" x2="51"  y2="398"/>
+<line x1="116" y1="0" x2="116" y2="398"/>
+<line x1="182" y1="0" x2="182" y2="398"/>
+<line x1="249" y1="0" x2="249" y2="398"/>
+<line x1="315" y1="0" x2="315" y2="398"/>
+<line x1="448" y1="0" x2="448" y2="398"/>
+<line x1="570" y1="0" x2="570" y2="398"/></g>
+</svg>
+<div class="rsi-dates"><span style="left:10px">3 Jul 18:00</span><span style="left:143px">4 Jul 18:00</span><span style="left:276px">5 Jul 18:00</span><span style="left:409px">6 Jul 18:00</span><span style="left:531px">7 Jul 18:00</span></div>
+</section>
+</div></div>
+<nav class="nav" aria-label="Bottom navigation">
+<div class="nav-item" onclick="go('quotes')" role="button" tabindex="0" aria-label="Quotes"><svg viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg" fill="#3F9FE8" fill-rule="evenodd" clip-rule="evenodd"><path d="M 20.00,12.00 17.00,11.00 5.00,23.00 0.00,22.00 0.00,38.00 1.00,39.00 5.00,39.00 10.00,37.00 16.00,37.00 16.00,35.00 14.00,32.00 26.00,21.00 26.00,18.00 23.00,16.00 Z M 44.00,0.00 26.00,1.00 22.00,3.00 26.00,7.00 23.00,11.00 24.00,13.00 30.00,8.00 27.00,5.00 31.00,3.00 40.00,3.00 41.00,4.00 41.00,16.00 40.00,17.00 36.00,15.00 20.00,31.00 20.00,32.00 24.00,31.00 36.00,19.00 38.00,19.00 40.00,22.00 43.00,22.00 43.00,16.00 44.00,15.00 Z"/></svg></div>
+<div class="nav-item active" onclick="go('chart')" role="button" tabindex="0" aria-label="Chart"><svg viewBox="0 0 47 46" xmlns="http://www.w3.org/2000/svg" fill="#3F9FE8" fill-rule="evenodd" clip-rule="evenodd"><path d="M 22.00,6.00 21.00,7.00 21.00,11.00 18.00,12.00 16.00,14.00 16.00,25.00 17.00,26.00 16.00,27.00 16.00,34.00 17.00,36.00 20.00,36.00 21.00,37.00 21.00,45.00 24.00,45.00 25.00,44.00 25.00,37.00 26.00,36.00 29.00,36.00 30.00,34.00 29.00,31.00 30.00,30.00 30.00,24.00 29.00,23.00 30.00,22.00 30.00,17.00 29.00,16.00 30.00,15.00 28.00,12.00 25.00,11.00 25.00,7.00 Z M 21.00,16.00 25.00,16.00 26.00,17.00 26.00,31.00 24.00,33.00 22.00,33.00 20.00,31.00 20.00,17.00 Z M 39.00,0.00 38.00,1.00 38.00,4.00 35.00,5.00 33.00,7.00 33.00,25.00 35.00,27.00 38.00,28.00 38.00,34.00 41.00,34.00 42.00,33.00 42.00,28.00 46.00,26.00 46.00,6.00 42.00,4.00 42.00,1.00 41.00,0.00 Z M 5.00,0.00 4.00,1.00 4.00,4.00 0.00,6.00 0.00,26.00 4.00,28.00 4.00,32.00 7.00,33.00 8.00,32.00 8.00,29.00 10.00,27.00 12.00,27.00 12.00,6.00 8.00,4.00 8.00,1.00 7.00,0.00 Z"/></svg></div>
+<div class="nav-item" onclick="go('trade')" role="button" tabindex="0" aria-label="Trade"><svg viewBox="0 0 44 42" xmlns="http://www.w3.org/2000/svg" fill="#6a6a6a" fill-rule="evenodd" clip-rule="evenodd"><path d="M 27.00,30.00 24.00,28.00 13.00,39.00 13.00,40.00 16.00,41.00 24.00,33.00 25.00,33.00 Z M 16.00,29.00 13.00,28.00 9.00,33.00 3.00,38.00 3.00,41.00 5.00,41.00 8.00,39.00 Z M 43.00,2.00 41.00,0.00 40.00,1.00 36.00,1.00 35.00,0.00 32.00,2.00 33.00,4.00 36.00,5.00 20.00,21.00 17.00,19.00 16.00,17.00 13.00,17.00 0.00,29.00 0.00,32.00 2.00,32.00 14.00,21.00 19.00,25.00 21.00,25.00 39.00,7.00 40.00,8.00 40.00,11.00 43.00,11.00 Z"/></svg></div>
+<div class="nav-item" onclick="go('dashboard')" role="button" tabindex="0" aria-label="History"><svg viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" fill="#6a6a6a" fill-rule="evenodd" clip-rule="evenodd"><path d="M 8.00,0.00 5.00,4.00 1.00,14.00 1.00,21.00 0.00,22.00 0.00,30.00 1.00,31.00 1.00,34.00 0.00,35.00 1.00,36.00 1.00,39.00 5.00,41.00 6.00,40.00 40.00,40.00 41.00,41.00 45.00,38.00 45.00,18.00 40.00,3.00 37.00,0.00 Z M 5.00,15.00 8.00,9.00 8.00,7.00 12.00,3.00 33.00,3.00 36.00,5.00 41.00,18.00 39.00,20.00 31.00,20.00 29.00,26.00 26.00,29.00 22.00,30.00 19.00,29.00 16.00,26.00 14.00,20.00 7.00,20.00 5.00,18.00 Z"/></svg></div>
+<div class="nav-item" onclick="go('messages')" role="button" tabindex="0" aria-label="Messages"><svg viewBox="0 0 47 45" xmlns="http://www.w3.org/2000/svg" fill="#6a6a6a" fill-rule="evenodd" clip-rule="evenodd"><path d="M 31.00,16.00 30.00,19.00 31.00,19.00 32.00,21.00 30.00,22.00 30.00,24.00 35.00,26.00 34.00,27.00 31.00,27.00 30.00,30.00 39.00,30.00 39.00,28.00 35.00,26.00 39.00,24.00 37.00,20.00 39.00,17.00 38.00,16.00 Z M 18.00,16.00 17.00,17.00 17.00,30.00 25.00,30.00 26.00,29.00 26.00,17.00 25.00,16.00 Z M 21.00,20.00 22.00,21.00 22.00,25.00 21.00,26.00 20.00,25.00 20.00,21.00 Z M 17.00,10.00 17.00,11.00 19.00,12.00 38.00,12.00 39.00,11.00 37.00,8.00 19.00,8.00 Z M 11.00,0.00 9.00,3.00 9.00,40.00 8.00,41.00 6.00,41.00 3.00,38.00 4.00,37.00 3.00,34.00 4.00,33.00 4.00,13.00 6.00,12.00 6.00,9.00 3.00,9.00 0.00,12.00 0.00,41.00 2.00,44.00 45.00,44.00 46.00,43.00 46.00,2.00 45.00,0.00 Z"/></svg></div>
+<div class="nav-item" role="button" tabindex="0" aria-label="More"><svg viewBox="0 0 46 45" xmlns="http://www.w3.org/2000/svg" fill="#6a6a6a" fill-rule="evenodd" clip-rule="evenodd"><path d="M 38.00,5.00 28.00,0.00 16.00,0.00 9.00,3.00 3.00,9.00 0.00,15.00 0.00,25.00 5.00,33.00 5.00,37.00 3.00,41.00 1.00,42.00 1.00,44.00 7.00,44.00 16.00,40.00 29.00,40.00 34.00,38.00 41.00,32.00 44.00,26.00 45.00,19.00 44.00,18.00 44.00,14.00 Z M 32.00,17.00 34.00,17.00 36.00,19.00 36.00,22.00 34.00,24.00 32.00,24.00 30.00,22.00 30.00,19.00 Z M 21.00,17.00 23.00,17.00 25.00,19.00 25.00,22.00 23.00,24.00 21.00,24.00 19.00,22.00 19.00,19.00 Z M 11.00,17.00 15.00,19.00 15.00,22.00 13.00,24.00 11.00,24.00 8.00,21.00 Z"/></svg></div>
+</nav>
+<script>
+(function(){function fit(){const scale=Math.min(1,window.innerWidth/732);document.documentElement.style.setProperty('--scale',String(scale));}fit();window.addEventListener('resize',fit,{passive:true});})();
+function go(target){if(target==='quotes') location.href='index.html';else if(target==='dashboard') location.href='dashboard.html';else location.href=target+'.html';}
+document.querySelectorAll('[role="button"]').forEach(function(item){item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();item.click()}})});
+
+
+/* Professional touch zoom: candles are clipped to the 594px plot; price axis stays fixed; vertical swipe scrolls to the full RSI/date axis. */
+(function(){
+  const wrap=document.querySelector('.chart-wrap');
+  const plot=document.getElementById('zoomPlot');
+  if(!wrap||!plot) return;
+
+  let scale=1;
+  let tx=0;
+  let mode='none';
+  let startX=0;
+  let startY=0;
+  let startTx=0;
+  let gesture='none';
+  let pinchStartDist=1;
+  let pinchStartScale=1;
+  let pinchCenter=0;
+  let pinchStartTx=0;
+  let lastTap=0;
+
+  function viewScale(){
+    const r=wrap.getBoundingClientRect();
+    return r.width/732 || 1;
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function clampTx(v,s){
+    const min=Math.min(0,594-(594*s));
+    const max=0;
+    return clamp(v,min,max);
+  }
+  function render(){
+    tx=clampTx(tx,scale);
+    plot.setAttribute('transform','translate('+tx.toFixed(2)+' 0) scale('+scale.toFixed(4)+' 1)');
+    const labels=document.getElementById('priceLabels');
+    if(labels){
+      const fs=Math.max(12,Math.min(15,15/Math.pow(scale,0.22)));
+      labels.setAttribute('font-size',fs.toFixed(2));
+    }
+  }
+  function localX(t){
+    const r=wrap.getBoundingClientRect();
+    return (t.clientX-r.left)/viewScale();
+  }
+  function dist(a,b){return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);}
+  function center(a,b){return (localX(a)+localX(b))/2;}
+
+  wrap.addEventListener('touchstart',function(e){
+    if(e.touches.length===1){
+      const now=Date.now();
+      if(now-lastTap<280){
+        scale=1;tx=0;render();lastTap=0;e.preventDefault();return;
+      }
+      lastTap=now;
+      mode='pending';
+      gesture='undecided';
+      startX=localX(e.touches[0]);
+      startY=e.touches[0].clientY;
+      startTx=tx;
+    } else if(e.touches.length===2){
+      mode='pinch';
+      gesture='pinch';
+      pinchStartDist=Math.max(1,dist(e.touches[0],e.touches[1]));
+      pinchStartScale=scale;
+      pinchCenter=center(e.touches[0],e.touches[1]);
+      pinchStartTx=tx;
+      e.preventDefault();
+    }
+  },{passive:false});
+
+  wrap.addEventListener('touchmove',function(e){
+    if(e.touches.length===2 && mode==='pinch'){
+      const d=Math.max(1,dist(e.touches[0],e.touches[1]));
+      const next=clamp(pinchStartScale*(d/pinchStartDist),0.60,3.0);
+      tx=pinchCenter-(pinchCenter-pinchStartTx)*(next/pinchStartScale);
+      scale=next;
+      render();
+      e.preventDefault();
+      return;
+    }
+    if(e.touches.length===1 && (mode==='pending'||mode==='pan')){
+      const x=localX(e.touches[0]);
+      const y=e.touches[0].clientY;
+      const dx=x-startX;
+      const dy=y-startY;
+      if(mode==='pending'){
+        if(Math.abs(dy)>Math.abs(dx)+4){
+          gesture='scroll';
+          mode='scroll';
+          return;
+        }
+        if(Math.abs(dx)>4){
+          gesture='pan';
+          mode='pan';
+          startX=x;
+          startTx=tx;
+        }else{
+          return;
+        }
+      }
+      if(mode==='pan'){
+        tx=clampTx(startTx+(x-startX),scale);
+        render();
+        e.preventDefault();
+      }
+    }
+  },{passive:false});
+
+  wrap.addEventListener('touchend',function(e){
+    if(e.touches.length===0) mode='none';
+    else if(e.touches.length===1){
+      mode='pending';
+      gesture='undecided';
+      startX=localX(e.touches[0]);
+      startY=e.touches[0].clientY;
+      startTx=tx;
+    }
+  },{passive:false});
+
+  wrap.addEventListener('touchcancel',function(){mode='none';gesture='none'},{passive:true});
+  render();
+})();
+
+</script>
+</body>
+</html>
